@@ -1,0 +1,21 @@
+{
+  "name": "s74_celebrity_divorce_list_the_silliest_reasons_they_split",
+  "version": "1.0.0",
+  "description": "**# Celebrity Divorce List: The Silliest Reasons They Split**",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kalviumcommunity/s74_celebrity_divorce_list_the_silliest_reasons_they_split.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/kalviumcommunity/s74_celebrity_divorce_list_the_silliest_reasons_they_split/issues"
+  },
+  "homepage": "https://github.com/kalviumcommunity/s74_celebrity_divorce_list_the_silliest_reasons_they_split#readme"
+}
