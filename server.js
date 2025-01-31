@@ -1,10 +1,11 @@
-const PORT = process.env.PORT || 8000;
-const app = require('express')();
+const express = require("express");
+const app = express();
 
-app.listen(PORT, (err) => {
-    if (err) {
-        console.error(`Error starting server: ${err.message}`);
-        process.exit(1); // Exit the process with failure code
-    }
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.get("/ping", (req, res) => {
+  res.send("pong");
+});
+
+const PORT = 3000;
+app.listen(PORT, () => {
+  console.log(Server running on http://localhost:${PORT});
 });
