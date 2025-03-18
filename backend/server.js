@@ -1,33 +1,41 @@
-require("dotenv").config();
-const express = require("express");
-const { MongoClient } = require("mongodb");
-const routes = require("./routes"); // Import routes
+const express = require('express');
+const mongoose = require('mongoose');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const divorceRoutes = require('../backend/routes/DivorceRoutes'); // Import the routes
+
+dotenv.config(); // Load environment variables
 
 const app = express();
-const PORT = 3000;
 
-const client = new MongoClient(process.env.MONGO_URI);
+// Middleware
+app.use(express.json());
+app.use(cors());
 
-async function connectDB() {
-    try {
-        await client.connect();
-        console.log("✅ Database Connected Successfully!");
-    } catch (error) {
-        console.error("❌ Database Connection Failed:", error);
-    }
-}
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+.then(() => console.log('✅ MongoDB Connected'))
+.catch(err => console.error('❌ MongoDB Connection Error:', err));
 
-connectDB();
+// Routes
+app.use('/api/divorces', divorceRoutes); // Use divorce routes
 
-app.use(express.json()); // Middleware to parse JSON
-// app.locals.client = client; // Store DB client for routes
-
-app.use("/api", routes); // Use the CRUD routes
-
-app.get("/", (req, res) => {
-    res.send("Successfully running");
+// Root endpoint
+app.get('/', (req, res) => {
+    res.send('Welcome to the Celebrity Divorce API');
 });
 
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: 'Something went wrong!' });
+});
+
+// Start the server
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Server running on port: http://localhost:${PORT}`);
 });
