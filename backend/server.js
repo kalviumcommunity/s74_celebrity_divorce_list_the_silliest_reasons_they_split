@@ -24,8 +24,8 @@ app.use(express.json()); // Middleware to parse JSON
 
 app.use("/api", routes); // Use the CRUD routes
 
-app.get("/ping", (req, res) => {
-    res.send("pong");
+app.get("/", (req, res) => {
+    res.send("Successfully running");
 });
 
 app.listen(PORT, () => {
