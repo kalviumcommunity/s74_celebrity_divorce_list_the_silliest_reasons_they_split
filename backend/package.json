@@ -4,6 +4,7 @@
   "description": "**# Celebrity Divorce List: The Silliest Reasons They Split**",
   "main": "server.js",
   "scripts": {
+    "build": "react-scripts build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
