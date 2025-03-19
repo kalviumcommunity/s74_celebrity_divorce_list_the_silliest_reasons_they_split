@@ -50,5 +50,5 @@ By working on this project, I’ll develop key skills like user authentication, 
 # Deployment link 
 https://s74-celebrity-divorce-list-the-silliest-a99y.onrender.com
 
-# frontend deployment link
+# Frontend deployment link
 http://gilded-nasturtium-543db9.netlify.app
