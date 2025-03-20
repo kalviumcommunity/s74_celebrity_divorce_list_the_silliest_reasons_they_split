@@ -36,27 +36,41 @@ router.post("/", async (req, res) => {
   }
 });
 
-// ✅ Update a divorce reason
+// Update a divorce entry by ID
 router.put("/:id", async (req, res) => {
   try {
-    const updatedDivorce = await Divorce.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    res.json(updatedDivorce);
+      const { celebrity1, celebrity2, reason } = req.body;
+
+      // Find and update the divorce record
+      const updatedDivorce = await Divorce.findByIdAndUpdate(
+          req.params.id,
+          { celebrity1, celebrity2, reason },
+          { new: true, runValidators: true }
+      );
+
+      if (!updatedDivorce) {
+          return res.status(404).json({ error: "Divorce entry not found" });
+      }
+
+      res.json({ message: "Divorce entry updated!", divorce: updatedDivorce });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-// ✅ Delete a divorce reason
+
+// Delete a divorce entry by ID
 router.delete("/:id", async (req, res) => {
   try {
-    await Divorce.findByIdAndDelete(req.params.id);
-    res.json({ message: "Divorce reason deleted!" });
+      const deletedDivorce = await Divorce.findByIdAndDelete(req.params.id);
+
+      if (!deletedDivorce) {
+          return res.status(404).json({ error: "Divorce entry not found" });
+      }
+
+      res.json({ message: "Divorce entry deleted!" });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+      res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
